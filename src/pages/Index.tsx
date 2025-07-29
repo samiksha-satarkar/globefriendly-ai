@@ -81,7 +81,6 @@ const Index = () => {
       
       {currentState === "itinerary" && tripData && (
         <TripItinerary 
-          itinerary={[]}
           destination={tripData.destination}
           onBack={handleBackToPlanning}
         />

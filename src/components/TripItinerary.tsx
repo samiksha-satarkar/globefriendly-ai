@@ -35,7 +35,7 @@ interface DayItinerary {
 }
 
 interface TripItineraryProps {
-  itinerary: DayItinerary[];
+  itinerary?: DayItinerary[];
   destination: string;
   onBack: () => void;
 }
