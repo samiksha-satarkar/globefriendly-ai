@@ -7,6 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 type AppState = "hero" | "planning" | "itinerary";
 
 interface TripPreferences {
+  source: string;
   destination: string;
   startDate: string;
   endDate: string;

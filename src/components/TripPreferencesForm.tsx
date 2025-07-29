@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Calendar, MapPin, DollarSign, Users, Heart, Sparkles } from "lucide-react";
 
 interface TripPreferences {
+  source: string;
   destination: string;
   startDate: string;
   endDate: string;
@@ -36,6 +37,7 @@ const travelStyles = [
 
 export const TripPreferencesForm = ({ onSubmit, isLoading = false }: TripPreferencesFormProps) => {
   const [preferences, setPreferences] = useState<TripPreferences>({
+    source: "",
     destination: "",
     startDate: "",
     endDate: "",
@@ -76,12 +78,26 @@ export const TripPreferencesForm = ({ onSubmit, isLoading = false }: TripPrefere
 
         <Card className="p-8 shadow-card">
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Destination & Dates */}
-            <div className="grid md:grid-cols-3 gap-6">
+            {/* Source & Destination */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="source" className="text-base font-medium flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-primary" />
+                  From (Source)
+                </Label>
+                <Input
+                  id="source"
+                  placeholder="Where are you traveling from?"
+                  value={preferences.source}
+                  onChange={(e) => setPreferences(prev => ({ ...prev, source: e.target.value }))}
+                  className="h-12"
+                />
+              </div>
+              
               <div className="space-y-2">
                 <Label htmlFor="destination" className="text-base font-medium flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-primary" />
-                  Destination
+                  To (Destination)
                 </Label>
                 <Input
                   id="destination"
@@ -91,6 +107,10 @@ export const TripPreferencesForm = ({ onSubmit, isLoading = false }: TripPrefere
                   className="h-12"
                 />
               </div>
+            </div>
+
+            {/* Dates */}
+            <div className="grid md:grid-cols-2 gap-6">
               
               <div className="space-y-2">
                 <Label htmlFor="startDate" className="text-base font-medium flex items-center gap-2">
@@ -217,7 +237,7 @@ export const TripPreferencesForm = ({ onSubmit, isLoading = false }: TripPrefere
               variant="hero"
               size="lg"
               className="w-full"
-              disabled={isLoading || !preferences.destination || !preferences.startDate}
+              disabled={isLoading || !preferences.source || !preferences.destination || !preferences.startDate}
             >
               {isLoading ? (
                 <>
